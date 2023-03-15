@@ -118,7 +118,7 @@ Timeout = 300
 # Possible values are memory, disk, mongo, gcp, minio, s3, azureblob, external
 # Defaults to memory
 # Env override: ATHENS_STORAGE_TYPE
-StorageType = "memory"
+StorageType = "http"
 
 # Certificate and key to make athens serve using https instead of plain text http.
 # Set both to enable.
@@ -373,6 +373,9 @@ ShutdownTimeout = 60
         # RootPath is the Athens Disk Root folder
         # Env override: ATHENS_DISK_STORAGE_ROOT
         RootPath = "/path/on/disk"
+    
+    [Storage.HTTP]
+        BaseURL = "http://127.0.0.1:8080/snxq/goproxy"
 
     [Storage.GCP]
         # Required IAM Roles (https://cloud.google.com/storage/docs/access-control/iam-roles):

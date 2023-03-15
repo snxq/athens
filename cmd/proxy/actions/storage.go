@@ -14,6 +14,7 @@ import (
 	"github.com/gomods/athens/pkg/storage/external"
 	"github.com/gomods/athens/pkg/storage/fs"
 	"github.com/gomods/athens/pkg/storage/gcp"
+	shttp "github.com/gomods/athens/pkg/storage/http"
 	"github.com/gomods/athens/pkg/storage/mem"
 	"github.com/gomods/athens/pkg/storage/minio"
 	"github.com/gomods/athens/pkg/storage/mongo"
@@ -70,6 +71,11 @@ func GetStorage(storageType string, storageConfig *config.Storage, timeout time.
 			return nil, errors.E(op, "Invalid External Storage Configuration")
 		}
 		return external.NewClient(storageConfig.External.URL, client), nil
+	case "http":
+		if storageConfig.HTTP == nil {
+			return nil, errors.E(op, "Invalid External Storage Configuration")
+		}
+		return shttp.NewStorage(storageConfig.HTTP.BaseURL)
 	default:
 		return nil, fmt.Errorf("storage type %s is unknown", storageType)
 	}

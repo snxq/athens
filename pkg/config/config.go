@@ -331,6 +331,8 @@ func validateStorage(validate *validator.Validate, storageType string, config *S
 		return validate.Struct(config.AzureBlob)
 	case "external":
 		return validate.Struct(config.External)
+	case "http":
+		return validate.Struct(config.HTTP)
 	default:
 		return fmt.Errorf("storage type %q is unknown", storageType)
 	}
